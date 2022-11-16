@@ -52,13 +52,23 @@ CreateWindow("BUTTON", content,  style | BS_AUTOCHECKBOX | WS_VISIBLE | WS_CHILD
 #define Radio(parent,content,style,posX,posY,sizeX,sizeY,ID)\
 CreateWindow("BUTTON", content,  style | BS_AUTORADIOBUTTON | WS_VISIBLE | WS_CHILD,  posX, posY,   sizeX,    sizeY, parent,    (HMENU)ID, (HINSTANCE)GetWindowLongPtr(parent, GWLP_HINSTANCE), NULL);      // Pointer not needed.			 
 
+#define Input(parent,style,posX,posY,sizeX,sizeY)\
+Entry(parent,style,posX,posY,sizeX,sizeY)
 
 #define Entry(parent,style,posX,posY,sizeX,sizeY)\
 CreateWindow("EDIT", "", WS_CHILD | WS_VISIBLE | WS_BORDER | ES_LEFT | ES_AUTOHSCROLL | ES_WANTRETURN, posX, posY, sizeX, sizeY, parent, (HMENU)0, NULL, 0);
 
+#define IP(parent,style,posX,posY,sizeX,sizeY)\
+IPEntry(parent,style,posX,posY,sizeX,sizeY)
+
 #define IPEntry(parent,style,posX,posY,sizeX,sizeY)\
 CreateWindow(WC_IPADDRESS, "", WS_CHILD | WS_VISIBLE | WS_BORDER | ES_LEFT | ES_AUTOHSCROLL | ES_WANTRETURN, posX, posY, sizeX, sizeY, parent, (HMENU)0, NULL, 0);
 
+
+
+#define Password(parent,style,posX,posY,sizeX,sizeY)\
+CreateWindow("EDIT","",WS_VISIBLE|WS_BORDER|WS_CHILD|ES_PASSWORD,posX,posY,sizeX,sizeY,parent,NULL,GetModuleHandle(NULL),NULL);
+			
 
 #define Listbox(parent,style,posX,posY,sizeX,sizeY)\
 CreateWindow( "LISTBOX",  NULL, WS_CHILD | WS_VISIBLE | WS_BORDER | style, posX,   posY,  sizeX, sizeY, parent,NULL,hInst,NULL);
@@ -127,6 +137,10 @@ void setText(HWND handle,char *content){
 	SendMessage(handle,WM_SETTEXT,0,(LPARAM)content);
 }
 
+
+void setText(HWND handle,int len,char *content){
+	SendMessage(handle,WM_GETTEXT,len,(LPARAM)content);
+}
 
     
 
